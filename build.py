@@ -5,7 +5,7 @@ from pathlib import Path
 from urllib.parse import quote
 
 ROOT = Path(__file__).parent
-PAGES_URL = "https://supportpark98.github.io/naver-sales/app.js"
+PAGES_URL = "https://supportpark98.github.io/naver-sales-guesstimate/app.js"
 
 app = (ROOT / "app.js").read_text(encoding="utf-8")
 version = re.search(r"VERSION = '([^']+)'", app).group(1)

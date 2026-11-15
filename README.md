@@ -1,9 +1,9 @@
-# 📊 네이버 판매량 분석 (베타)
+# 📊 naver-sales-guesstimate — 네이버 판매량 추정 (베타)
 
 네이버 브랜드스토어 상품 페이지의 구매자 수 배지(오늘 / 최근 1주 / 약 4개월)를 읽어
 일간·주간 판매량과 추정매출을 보여주는 북마클릿 도구입니다.
 
-- 설치 페이지: https://supportpark98.github.io/naver-sales/
+- 설치 페이지: https://supportpark98.github.io/naver-sales-guesstimate/
 - `app.js` — 분석 창과 수집 로직 (북마클릿이 이 파일을 불러옴)
 - `template.html` + `build.py` → `index.html` (설치 페이지) 생성
 
