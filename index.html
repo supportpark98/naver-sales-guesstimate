@@ -50,6 +50,18 @@
   </section>
 
   <section>
+    <h2>📊 아이콘으로 설치하기 (선택)</h2>
+    <p class="note" style="margin-top:0">끌어다 놓으면 크롬이 지구본 아이콘을 붙여요. 📊 아이콘으로 쓰고 싶으면 아래처럼 설치하세요.</p>
+    <ol>
+      <li>이 페이지에서 주소창 오른쪽 <b>☆(별표)</b>를 눌러 즐겨찾기바에 추가하세요. 📊 아이콘으로 저장돼요.</li>
+      <li>아래 <b>코드 복사</b> 버튼을 누르세요.
+        <div class="bms"><button class="bm" id="copyLoader" type="button" style="border:0;font-size:15px">📋 코드 복사</button><span class="note" id="copyMsg"></span></div>
+      </li>
+      <li>방금 만든 즐겨찾기를 <b>우클릭 → 수정</b>을 누르고, 이름은 <b>판매량 분석</b>, URL은 지우고 <b>Ctrl+V</b>로 붙여넣은 뒤 저장하세요.</li>
+    </ol>
+  </section>
+
+  <section>
     <h2>2. 사용하기</h2>
     <ol>
       <li>네이버 <b>브랜드스토어 상품 페이지</b>를 엽니다. 예: <code>brand.naver.com/○○○/products/123…</code></li>
@@ -95,5 +107,14 @@
 
   <footer>내부용 베타 도구 · 네이버와 관련 없는 비공식 도구예요.</footer>
 </main>
+<script>
+  document.getElementById('copyLoader').onclick = async () => {
+    const code = document.querySelector('.bm[href^="javascript:"]').getAttribute('href');
+    const msg = document.getElementById('copyMsg');
+    try { await navigator.clipboard.writeText(code); }
+    catch (e) { const t = document.createElement('textarea'); t.value = code; document.body.appendChild(t); t.select(); document.execCommand('copy'); t.remove(); }
+    msg.textContent = '✅ 복사됐어요! 즐겨찾기 수정 화면의 URL 칸에 붙여넣으세요.';
+  };
+</script>
 </body>
 </html>
