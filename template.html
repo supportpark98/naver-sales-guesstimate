@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>네이버 판매량 분석 (베타)</title>
+<style>
+  :root { --green: #03c75a; --ink: #1a1a1a; --sub: #5b6068; --line: #e6e8eb; --bg: #f6f7f9; }
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: -apple-system, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif; color: var(--ink); background: var(--bg); line-height: 1.6; }
+  main { max-width: 820px; margin: 0 auto; padding: 48px 20px 80px; }
+  h1 { font-size: 28px; margin: 0 0 6px; }
+  .tag { display: inline-block; font-size: 12px; background: #e8f9ef; color: #027a37; padding: 2px 8px; border-radius: 999px; margin-left: 6px; vertical-align: middle; }
+  .lead { color: var(--sub); margin: 0 0 32px; }
+  section { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 24px; margin-bottom: 20px; }
+  h2 { font-size: 18px; margin: 0 0 14px; }
+  ol { padding-left: 20px; margin: 0; } li { margin-bottom: 8px; }
+  .bm { display: inline-block; padding: 12px 20px; background: var(--green); color: #fff; font-weight: 700; border-radius: 10px; text-decoration: none; cursor: grab; box-shadow: 0 4px 12px rgba(3,199,90,.3); }
+  .bm.alt { background: #fff; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+  .bms { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin: 14px 0 6px; }
+  .note { font-size: 13px; color: var(--sub); }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { background: var(--bg); font-weight: 600; white-space: nowrap; }
+  code { background: var(--bg); padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+  .warn { background: #fff7e8; border-color: #f3dfb5; }
+  footer { text-align: center; font-size: 12px; color: var(--sub); }
+</style>
+</head>
+<body>
+<main>
+  <h1>📊 네이버 판매량 분석 <span class="tag">베타 __VERSION__</span></h1>
+  <p class="lead">네이버 브랜드스토어 상품의 구매자 수 배지를 읽어 일간·주간 판매량과 추정매출을 보여주는 도구예요.</p>
+
+  <section>
+    <h2>1. 설치하기 (처음 한 번만)</h2>
+    <ol>
+      <li>크롬에서 <b>Ctrl + Shift + B</b>를 눌러 즐겨찾기바를 켜세요. 이미 보이면 넘어가세요.</li>
+      <li>아래 초록색 버튼을 마우스로 <b>끌어서 즐겨찾기바에 놓으세요.</b> 클릭이 아니라 끌어다 놓기예요.</li>
+    </ol>
+    <div class="bms">
+      <a class="bm" href="__LOADER__" onclick="alert('클릭하지 말고, 이 버튼을 즐겨찾기바로 끌어다 놓아주세요!'); return false;">📊 판매량 분석</a>
+      <a class="bm alt" href="__STANDALONE__" onclick="alert('클릭하지 말고, 이 버튼을 즐겨찾기바로 끌어다 놓아주세요!'); return false;">📊 판매량 분석 (단독)</a>
+    </div>
+    <p class="note">
+      · <b>판매량 분석</b>: 기본 버전이에요. 누를 때마다 최신 코드를 불러와서, 업데이트되면 자동으로 반영돼요.<br>
+      · <b>판매량 분석 (단독)</b>: 기본 버전이 반응이 없을 때 쓰세요. 코드가 버튼 안에 다 들어 있어서 어떤 환경에서든 동작하지만, 업데이트되면 다시 설치해야 해요.
+    </p>
+  </section>
+
+  <section>
+    <h2>2. 사용하기</h2>
+    <ol>
+      <li>네이버 <b>브랜드스토어 상품 페이지</b>를 엽니다. 예: <code>brand.naver.com/○○○/products/123…</code></li>
+      <li>즐겨찾기바의 <b>📊 판매량 분석</b>을 누르면 화면 오른쪽 위에 분석 창이 떠요.</li>
+      <li>분석할 상품을 한 줄에 하나씩 넣습니다.
+        <ul>
+          <li>숫자만 넣으면 → 지금 열려 있는 스토어의 상품으로 조회해요.</li>
+          <li>다른 브랜드스토어 상품은 → 상품 페이지 주소 전체를 넣으세요.</li>
+          <li><b>＋ 지금 보는 상품 추가</b>를 누르면 현재 상품이 목록에 들어가요.</li>
+        </ul>
+      </li>
+      <li><b>분석 시작 ▶</b>을 누르면 상품마다 몇 초씩 걸려서 결과가 표로 나와요.</li>
+      <li><b>📋 엑셀용 복사</b>를 누른 뒤 엑셀이나 구글시트에 붙여넣거나, <b>💾 CSV 다운로드</b>로 저장하세요.</li>
+    </ol>
+    <p class="note">넣어둔 상품 목록은 기억돼서, 다음에 열면 그대로 있어요. 버튼을 한 번 더 누르면 창이 닫혀요.</p>
+  </section>
+
+  <section>
+    <h2>3. 결과 항목 설명</h2>
+    <table>
+      <tr><th>오늘</th><td>오늘 0시부터 지금까지 구매자 수. 수집 시각에 따라 달라져요.</td></tr>
+      <tr><th>최근1주</th><td>최근 7일 구매자 수. <b>상품끼리 비교할 때 기준</b>으로 쓰세요.</td></tr>
+      <tr><th>일평균</th><td>최근1주 ÷ 7</td></tr>
+      <tr><th>약4개월</th><td>최근 약 4개월 구매자 수(추정 기간, "N명 이상"으로 반올림된 값)</td></tr>
+      <tr><th>실시간 매출</th><td>오늘 구매자 × 대표가격 (수집 시각까지)</td></tr>
+      <tr><th>일간 예상매출</th><td>최근1주 ÷ 7 × 대표가격 — <b>메인 지표</b></td></tr>
+      <tr><th>주간 매출</th><td>최근1주 × 대표가격</td></tr>
+      <tr><th>4개월 매출</th><td>약4개월 구매자 × 대표가격</td></tr>
+      <tr><th>2년 구매 / 재구매</th><td>네이버가 내려주는 추가 배지 문구 그대로 (실험 항목)</td></tr>
+    </table>
+  </section>
+
+  <section class="warn">
+    <h2>⚠️ 알아둘 점</h2>
+    <ol>
+      <li>숫자는 <b>구매자 수(명)</b>라서 실제 판매 수량이나 매출보다 작게 나와요. 한 사람이 여러 개를 사거나 비싼 옵션을 사는 경우가 빠지거든요.</li>
+      <li>대표가격은 기본 옵션의 즉시할인가예요. 쿠폰이나 카드 혜택이 반영된 최대할인가는 아니에요.</li>
+      <li>지금은 <b>브랜드스토어(brand.naver.com)</b> 상품만 지원해요. 일반 스마트스토어는 다음 버전에서 지원할 예정이에요.</li>
+      <li>짧은 시간에 너무 많이 조회하면 네이버가 막을 수 있어요. 한 번에 수십 개 이내로 쓰는 걸 추천해요.</li>
+      <li>네이버 화면 구조가 바뀌면 동작이 멈출 수 있어요. 베타 버전이라 결과는 참고용으로 써주세요.</li>
+    </ol>
+  </section>
+
+  <footer>내부용 베타 도구 · 네이버와 관련 없는 비공식 도구예요.</footer>
+</main>
+</body>
+</html>
